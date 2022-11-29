@@ -1,4 +1,7 @@
-s#!/bin/bash
+#!/bin/bash
+
+STR='.log'
+
 case "$1" in
 	"") echo "1084634 | 1084565"
 	;;
