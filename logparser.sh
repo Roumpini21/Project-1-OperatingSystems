@@ -18,7 +18,7 @@ echo "$guser2 user2"
 case "$1" in
 	"") echo "1084634 | 1084565"
 	;;
-        "access.log")
+        access.log)
 	case "$2" in
 		"")
 		file $1
@@ -26,41 +26,26 @@ case "$1" in
 		echo $line
 		done < access.log
 		;;
-		"--usrid")
+		--usrid)
 		case "$3" in
 			"")
 			mining_usernames $1
 			;;
-			"root")
-			grep "root" $1
+			root|admin|user1|user2|-)
+			grep "$3" $1
         		;;
-			"admin")
-			grep "admin" $1
-			;;
-			"user1")
-			grep "user1" $1
-			;;
-			"user2")
-			grep "user2" $1
-			;;
-			"-")
-			grep -v 'admin\|root\|user1\|user2' $1
-			;;
 		esac
 		;;
-		"-method")
+		-method)
 		case "$3" in
-			"GET")
-			grep "GET" $1
-			;;
-			"POST")
-			grep "POST" $1
+			GET|POST)
+			grep "$3" $1
 			;;
 			*)
 			echo "Wrong Method Name"
 		esac
 		;;
-		"--servprot")
+		--servprot)
 		case "$3" in
 			"IPv4")
 			grep "127.0.0.1" $1
@@ -73,7 +58,7 @@ case "$1" in
 			;;
 		esac
 		;;
-		"--datum")
+		--datum)
 		case "$3" in
 			Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
 			grep "$3" $1
@@ -83,6 +68,7 @@ case "$1" in
 			;;
 		esac
 		;;
+		
 	esac
 	;;
 	*)
