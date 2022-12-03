@@ -75,8 +75,11 @@ case "$1" in
 		;;
 		"--datum")
 		case "$3" in
-			"Jan")
-			grep "Jan" $1
+			Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+			grep "$3" $1
+			;;
+			*)
+			echo "Wrong Date"
 			;;
 		esac
 		;;
