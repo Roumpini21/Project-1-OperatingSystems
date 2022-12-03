@@ -78,6 +78,8 @@ case "$1" in
 			"Jan")
 			grep "Jan" $1
 			;;
+		esac
+		;;
 	esac
 	;;
 	*)
