@@ -16,6 +16,7 @@ case "$1" in
 		"--userid") echo "hello"
         	;;
 	esac
+	;;
 	*)
 	if grep -q -v "$STR" <<< "$1"; then
   	echo "Wrong Arguments"
