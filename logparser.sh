@@ -3,7 +3,7 @@
 STR='.log'
 
 mining_usernames(){
-awk '{count[$3]++} END {for (word in count) print count[word], word}' $1
+awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
 }
 
 case "$1" in
