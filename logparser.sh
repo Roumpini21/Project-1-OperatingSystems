@@ -3,9 +3,16 @@
 STR='.log'
 
 mining_usernames(){
-
-
-
+gno="$(grep -v -c 'admin\|root\|user1\|user2' $1)"
+echo "$gno -"
+gadmin="$(grep -c 'admin' $1)"
+echo "$gadmin admin"
+groot="$(grep -c 'root' $1)"
+echo "$groot root"
+guser1="$(grep -c 'user1' $1)"
+echo "$guser1 user1"
+guser2="$(grep -c 'user2' $1)"
+echo "$guser2 user2"
 }
 
 case "$1" in
@@ -19,8 +26,58 @@ case "$1" in
 		echo $line
 		done < access.log
 		;;
-		"--userid") echo "hello"
-        	;;
+		"--usrid")
+		case "$3" in
+			"")
+			mining_usernames $1
+			;;
+			"root")
+			grep "root" $1
+        		;;
+			"admin")
+			grep "admin" $1
+			;;
+			"user1")
+			grep "user1" $1
+			;;
+			"user2")
+			grep "user2" $1
+			;;
+			"-")
+			grep -v 'admin\|root\|user1\|user2' $1
+			;;
+		esac
+		;;
+		"-method")
+		case "$3" in
+			"GET")
+			grep "GET" $1
+			;;
+			"POST")
+			grep "POST" $1
+			;;
+			*)
+			echo "Wrong Method Name"
+		esac
+		;;
+		"--servprot")
+		case "$3" in
+			"IPv4")
+			grep "127.0.0.1" $1
+			;;
+			"IPv6")
+			grep "::1" $1
+			;;
+			*)
+			echo "Wrong Network Protocol"
+			;;
+		esac
+		;;
+		"--datum")
+		case "$3" in
+			"Jan")
+			grep "Jan" $1
+			;;
 	esac
 	;;
 	*)
