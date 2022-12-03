@@ -2,6 +2,12 @@
 
 STR='.log'
 
+mining_usernames(){
+
+
+
+}
+
 case "$1" in
 	"") echo "1084634 | 1084565"
 	;;
@@ -23,3 +29,4 @@ case "$1" in
 	fi
 	;;
 esac
+
