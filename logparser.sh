@@ -1,19 +1,8 @@
-#!/bin/bash 
+#!/bin/bash
 
 STR='.log'
 
-mining_usernames(){
-gno="$(grep -v -c 'admin\|root\|user1\|user2' $1)"
-echo "$gno -"
-gadmin="$(grep -c 'admin' $1)"
-echo "$gadmin admin"
-groot="$(grep -c 'root' $1)"
-echo "$groot root"
-guser1="$(grep -c 'user1' $1)"
-echo "$guser1 user1"
-guser2="$(grep -c 'user2' $1)"
-echo "$guser2 user2"
-}
+mining_usernames(){awk '{count[$3]++} END {for (word in count) print count[word], word}' $1}
 
 case "$1" in
 	"") echo "1084634 | 1084565"
