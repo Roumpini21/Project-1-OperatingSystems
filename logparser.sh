@@ -21,10 +21,7 @@ case "$1" in
         access.log)
 	case "$2" in
 		"")
-		file $1
-		while read line; do
-		echo $line
-		done < access.log
+		awk '{print}' $1
 		;;
 		--usrid)
 		case "$3" in
@@ -58,6 +55,9 @@ case "$1" in
 			;;
 		esac
 		;;
+		--browsers)
+		count_browsers $1
+		;;
 		--datum)
 		case "$3" in
 			Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
@@ -68,7 +68,6 @@ case "$1" in
 			;;
 		esac
 		;;
-		
 	esac
 	;;
 	*)
