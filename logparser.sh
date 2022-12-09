@@ -1,9 +1,13 @@
-#!/bin/bash  
+#!/bin/bash
 
 STR='.log'
 
 mining_usernames(){
 awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
+}
+
+counting_browsers(){
+
 }
 
 case "$1" in
@@ -19,15 +23,36 @@ case "$1" in
 			"")
 			mining_usernames $1
 			;;
-			root|admin|user1|user2|-)
-			grep "$3" $1
+			root)
+			awk '{if ($3 == "root") {print} else {next}}' $1
         		;;
+			admin)
+			awk '{if ($3 == "admin") {print} else {next}}' $1
+			;;
+			president)
+			awk '{if ($3 == "president") {print} else {next}}' $1
+			;;
+			user1)
+			awk '{if ($3 == "user1") {print} else {next}}' $1
+			;;
+			user2)
+			awk '{if ($3 == "user2") {print} else {next}}' $1
+			;;
+			user3)
+			awk '{if ($3 == "user3") {print} else {next}}' $1
+			;;
+			-)
+			awk '{if ($3 == "-") {print} else {next}}' $1
+			;;
 		esac
 		;;
 		-method)
 		case "$3" in
-			GET|POST)
-			grep "$3" $1
+			GET)
+			awk '/GET/' $1
+			;;
+			POST)
+			awk '/POST/' $1
 			;;
 			*)
 			echo "Wrong Method Name"
@@ -36,10 +61,10 @@ case "$1" in
 		--servprot)
 		case "$3" in
 			"IPv4")
-			grep "127.0.0.1" $1
+			awk '/127.0.0.1/' $1
 			;;
 			"IPv6")
-			grep "::1" $1
+			awk '/::1/' $1
 			;;
 			*)
 			echo "Wrong Network Protocol"
@@ -47,7 +72,7 @@ case "$1" in
 		esac
 		;;
 		--browsers)
-		count_browsers $1
+		counting_browsers $1
 		;;
 		--datum)
 		case "$3" in
@@ -62,9 +87,6 @@ case "$1" in
 	esac
 	;;
 	*)
-	if grep -q -v "$STR" <<< "$1"; then
-  	echo "Wrong Arguments"
+	if [[ "$1" != *".log"* ]]; then echo "Invalid Arguments"
 	fi
-	;;
 esac
-
