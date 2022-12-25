@@ -1,3 +1,6 @@
+#Iasonas Pavlopoulos, 1084565
+#Roumpini-Maria Angoura, 1084634
+
 #!/bin/bash
 
 STR='.log'
