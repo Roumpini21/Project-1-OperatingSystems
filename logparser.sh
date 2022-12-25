@@ -9,10 +9,6 @@ mining_usernames(){
 awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
 }
 
-counting_browsers(){
-
-}
-
 case "$1" in
 	"") echo "1084634 | 1084565"
 	;;
