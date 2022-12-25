@@ -1,13 +1,12 @@
+#Iasonas Pavlopoulos, 1084565
+#Roumpini-Maria Angoura, 1084634
+
 #!/bin/bash
 
 STR='.log'
 
 mining_usernames(){
 awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
-}
-
-counting_browsers(){
-
 }
 
 case "$1" in
