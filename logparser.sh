@@ -4,7 +4,7 @@
 #!/bin/bash
 
 STR='.log'
-filename = $1
+filename=$1
 
 mining_usernames(){
 awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
