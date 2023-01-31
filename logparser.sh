@@ -12,15 +12,16 @@ awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort 
 # Define the count function
 count_browsers() {
 	line=$(awk '{ line = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s", $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26) } END { print line }' $1)
-	mozilla=$(awk -v line="$line" '{ if (match(line, "Mozilla")) { mozilla++ } } END { print mozilla }')
-	chrome=$(awk -v line="$line" '{ if (match(line, "Chrome")) { chrome++ } } END { print chrome }')
-	safari=$(awk -v line="$line" '{ if (match(line, "Safari")) { safari++ } } END { print safari }')
-	edge=$(awk -v line="$line" '{ if (match(line, "Edg")) { edge++ } } END { print edge }')
+echo "Line: $line"
+mozilla=$(awk -v line="$line" '{ if (match(line, "Mozilla")) { mozilla++ } } END { print mozilla }')
+echo "Mozilla: $mozilla"
+chrome=$(awk -v line="$line" '{ if (match(line, "Chrome")) { chrome++ } } END { print chrome }')
+echo "Chrome: $chrome"
+safari=$(awk -v line="$line" '{ if (match(line, "Safari")) { safari++ } } END { print safari }')
+echo "Safari: $safari"
+edge=$(awk -v line="$line" '{ if (match(line, "Edg")) { edge++ } } END { print edge }')
+echo "Edge: $edge"
 
-    echo "Mozilla: $mozilla"
-    echo "Chrome: $chrome"
-    echo "Safari: $safari"
-    echo "Edge: $edge"
 }
 
 case "$1" in
