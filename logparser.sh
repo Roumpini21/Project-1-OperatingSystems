@@ -12,10 +12,10 @@ awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort 
 
 # Define the count function
 count_browsers() {
-	mozilla=$(awk '{ print "Column 9: " $9; if (match($9, "Mozilla")) { mozilla++ } } END { print mozilla }' $filename)
-	chrome=$(awk '{ if (match($9, "Chrome")) { chrome++ } } END { print chrome }' $filename)
-    safari=$(awk '{ if (match($9, "AppleWebKit")) { safari++ } } END { print safari }' $filename)
-    edge=$(awk '{ if (match($9, "Edg")) { edge++ } } END { print edge }' $filename)
+	mozilla=$(awk '{ line = sprintf("%s %s %s %s %s", $12, $13, $14, $15, $16); if (match(line, "Mozilla")) { mozilla++ } } END { print mozilla }' $1)
+	chrome=$(awk '{ line = sprintf("%s %s %s %s %s", $12, $13, $14, $15, $16); if (match($9, "Chrome")) { chrome++ } } END { print chrome }' $1)
+    safari=$(awk '{ line = sprintf("%s %s %s %s %s", $12, $13, $14, $15, $16); if (match($9, "AppleWebKit")) { safari++ } } END { print safari }' $1)
+    edge=$(awk '{ line = sprintf("%s %s %s %s %s", $12, $13, $14, $15, $16); if (match($9, "Edg")) { edge++ } } END { print edge }' $1)
 
     echo "Mozilla: $mozilla"
     echo "Chrome: $chrome"
