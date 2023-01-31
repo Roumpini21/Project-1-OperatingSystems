@@ -4,6 +4,7 @@
 #!/bin/bash
 
 STR='.log'
+$filename = $1
 
 mining_usernames(){
 awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
@@ -11,19 +12,16 @@ awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort 
 
 # Define the count function
 count_browsers() {
-	mozilla=$(awk '{ if (match($9, "Mozilla")) { mozilla++ } } END { print mozilla }' $1)
-	chrome=$(awk '{ if (match($9, "Chrome")) { chrome++ } } END { print chrome }' $1)
-    safari=$(awk '{ if (match($9, "AppleWebKit")) { safari++ } } END { print safari }' $1)
-    edge=$(awk '{ if (match($9, "Edg")) { edge++ } } END { print edge }' $1)
+	mozilla=$(awk '{ if (match($9, "Mozilla")) { mozilla++ } } END { print mozilla }' $filename)
+	chrome=$(awk '{ if (match($9, "Chrome")) { chrome++ } } END { print chrome }' $filename)
+    safari=$(awk '{ if (match($9, "AppleWebKit")) { safari++ } } END { print safari }' $filename)
+    edge=$(awk '{ if (match($9, "Edg")) { edge++ } } END { print edge }' $filename)
 
     echo "Mozilla: $mozilla"
     echo "Chrome: $chrome"
     echo "Safari: $safari"
     echo "Edge: $edge"
 }
-
-# Call the count function
-count_browsers
 
 case "$1" in
 	"") echo "1084634 | 1084565"
