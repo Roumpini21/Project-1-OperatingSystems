@@ -12,7 +12,7 @@ awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort 
 # Define the count function
 count_browsers() {
 	mozilla=$(awk '{ line = sprintf("%s %s", $12, $13); if (match(line, "Mozilla")) { mozilla++ } } END { print mozilla }' $1)
-	chrome=$(awk '{ line = sprintf("%s %s %s %s %s", $16, $17, $18, $19, $20); if (match($line, "Chrome")) { chrome++ } } END { print chrome }' $1)
+	chrome=$(awk '{ line = sprintf("%s %s", $21, $22); if (match($line, "Chrome")) { chrome++ } } END { print chrome }' $1)
     safari=$(awk '{ line = sprintf("%s %s %s %s %s", $12, $13, $14, $15, $16); if (match($9, "AppleWebKit")) { safari++ } } END { print safari }' $1)
     edge=$(awk '{ line = sprintf("%s %s %s %s %s", $12, $13, $14, $15, $16); if (match($9, "Edg")) { edge++ } } END { print edge }' $1)
 
