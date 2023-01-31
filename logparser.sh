@@ -9,8 +9,6 @@ mining_usernames(){
 awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
 }
 
-filename="file.txt"
-
 # Define the count function
 count_browsers() {
   mozilla=$(awk '{ if (match($6, "Mozilla")) { mozilla++ } } END { print mozilla }' $1)
