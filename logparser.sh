@@ -11,18 +11,15 @@ awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort 
 
 # Define the count function
 count_browsers() {
-line=$(awk 'NF >= 26 { line = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s", $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26); print line }' $1)
-mozilla=$(echo "$line" | awk '{ if (match($0, "Mozilla")) { mozilla++ } } END { print mozilla }')
-chrome=$(echo "$line" | awk '{ if (match($0, "Chrome")) { chrome++ } } END { print chrome }')
-safari=$(echo "$line" | awk '{ if (match($0, "Safari")) { safari++ } } END { print safari }')
-edge=$(echo "$line" | awk '{ if (match($0, "Edg")) { edge++ } } END { print edge }')
+mozilla=$(awk '{ line = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s", $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26); if (match(line, "Mozilla")) { mozilla++ } } END { print mozilla }' $1)
+chrome=$(awk '{ line = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s", $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26); if (match(line, "Chrome")) { chrome++ } } END { print chrome }')
+safari=$(awk '{ line = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s", $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26); if (match(line, "Safari")) { safari++ } } END { print safari }')
+edge=$(awk '{ line = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s", $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26); if (match(line, "Edg")) { edge++ } } END { print edge }')
 
 echo "Mozilla: $mozilla"
 echo "Chrome: $chrome"
 echo "Safari: $safari"
 echo "Edge: $edge"
-
-
 }
 
 case "$1" in
