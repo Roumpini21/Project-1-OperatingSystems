@@ -9,6 +9,24 @@ mining_usernames(){
 awk '{count[$3]++} END {for (word in count) print count[word], word}' $1 | sort -k 2
 }
 
+filename="file.txt"
+
+# Define the count function
+count_browsers() {
+  mozilla=$(awk '{ if (match($6, "Mozilla")) { mozilla++ } } END { print mozilla }' $1)
+  chrome=$(awk '{ if (match($6, "Chrome")) { chrome++ } } END { print chrome }' $1)
+  safari=$(awk '{ if (match($6, "Safari")) { safari++ } } END { print safari }' $1)
+  edge=$(awk '{ if (match($6, "Edg")) { edge++ } } END { print edge }' $1)
+
+  echo "Mozilla: $mozilla"
+  echo "Chrome: $chrome"
+  echo "Safari: $safari"
+  echo "Edge: $edge"
+}
+
+# Call the count function
+count_browsers
+
 case "$1" in
 	"") echo "1084634 | 1084565"
 	;;
@@ -71,7 +89,7 @@ case "$1" in
 		esac
 		;;
 		--browsers)
-		counting_browsers $1
+		count_browsers $1
 		;;
 		--datum)
 		case "$3" in
