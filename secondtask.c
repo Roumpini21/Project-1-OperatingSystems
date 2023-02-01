@@ -1,3 +1,6 @@
+//Iasonas Pavlopoulos, 1084565
+//Roumpini-Maria Angoura, 1084634
+
 #include <stdio.h>
 #include <math.h>
 #include <sys/time.h>
@@ -5,7 +8,7 @@
 #include <sys/msg.h>
 #include <unistd.h>
 #include <sys/wait.h>
-
+σ
 int proc_num;
 
 double get_wtime(void)
